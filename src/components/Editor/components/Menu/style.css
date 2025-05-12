@@ -1,0 +1,65 @@
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  background: #F4F5F7;
+  border-radius: 3px;
+
+  position: sticky;
+  top: 5px;
+  z-index: 1000;
+  margin: 10px;
+}
+
+.menu button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 3px;
+  color: #172B4D;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu button:hover {
+  background: #DFE1E6;
+}
+
+.menu button.is-active {
+  background: #DFE1E6;
+  color: #0052CC;
+}
+
+.color-picker {
+  width: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: absolute;
+  background: #23272f;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 9999;
+}
+
+.color-picker button {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: none;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+
+.color-picker button[aria-checked="true"] {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #2563eb;
+}

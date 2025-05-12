@@ -1,0 +1,47 @@
+.bubble-menu {
+  display: flex;
+  background: #F4F5F7;
+  padding: 5px;
+  border-radius: 3px;
+  gap: 4px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.bubble-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #172B4D;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  padding: 0 8px;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bubble-menu button:hover {
+  background: #DFE1E6;
+}
+
+.bubble-menu button.is-active {
+  background: #DFE1E6;
+  color: #0052CC;
+}
+
+.bubble-menu button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.bubble-menu .divider {
+  width: 1px;
+  background-color: #DFE1E6;
+  margin: 0 2px;
+}

@@ -1,0 +1,72 @@
+.tree-node {
+  padding: 4px 0;
+  position: relative;
+}
+
+.tree-node.dragging {
+  opacity: 0.5;
+}
+
+.tree-node.about-to-drop > .tree-node-header{
+  background-color: #95a9f16a;
+}
+
+.tree-node-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.tree-node-header:hover {
+  background-color: #EBECF0;
+}
+
+.tree-node-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tree-node-icon {
+  color: #6B778C;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tree-node-label {
+  color: #172B4D;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tree-node-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tree-node-header:hover .tree-node-actions {
+  opacity: 1;
+}
+
+.tree-node-actions button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.tree-node-children {
+  margin-left: 24px;
+}

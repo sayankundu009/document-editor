@@ -38,6 +38,32 @@ npm install @tiptap/extension-color @tiptap/extension-document @tiptap/extension
 
 ```
 
+# Tree Structure
+
+A hierarchical tree structure component with drag-and-drop functionality for organizing files and folders.
+
+## Features
+- Drag and drop files/folders
+- Create nested folders
+- Collapsible folders
+- Visual drop indicators
+- Add new items
+
+## Dependencies
+- @atlaskit/pragmatic-drag-and-drop@1.6.1
+- @atlaskit/pragmatic-drag-and-drop-hitbox@1.0.3
+- @atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.1.0
+- lucide-react@0.509.0
+
+## Installation
+
+Install all dependencies with a single command:
+
+```bash
+npm install @atlaskit/pragmatic-drag-and-drop@1.6.1 @atlaskit/pragmatic-drag-and-drop-hitbox@1.0.3 @atlaskit/pragmatic-drag-and-drop-react-drop-indicator@3.1.0 lucide-react@0.509.0
+
+```
+
 ## Development
 
 Start the development server:

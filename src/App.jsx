@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, Suspense, lazy } from 'react';
+import Sidebar from './components/Sidebar';
 
 const DocumentEditor = lazy(() => import('./components/Editor'));
 
@@ -22,17 +23,22 @@ function App() {
   return (
     <>
       <main>
-        <Suspense fallback={<div></div>}>
-          <DocumentEditor 
-            value={value}
-            onChange={setValue}
-            mention={{
-              items: users,
-              getLabel: (item) => item.name,
-              getId: (item) => item.id,
-            }}
-          />
-        </Suspense>
+        <aside className='sidebar'>
+          <Sidebar />
+        </aside>
+        <section className='editor'>
+          <Suspense fallback={<div></div>}>
+            <DocumentEditor 
+              value={value}
+              onChange={setValue}
+              mention={{
+                items: users,
+                getLabel: (item) => item.name,
+                getId: (item) => item.id,
+              }}
+            />
+          </Suspense>
+        </section>
       </main>
     </>
   )

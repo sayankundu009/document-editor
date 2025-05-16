@@ -35,15 +35,3 @@
     }
   }
 }
-
-.mention {
-    background-color: oklch(62.3% 0.214 259.815);
-    border-radius: 0.4rem;
-    box-decoration-break: clone;
-    color: #fff;
-    padding: 0.2rem 0.2rem 0.3rem 0.2rem;
-    cursor: pointer;
-    &::after {
-      content: "\200B";
-    }
-}

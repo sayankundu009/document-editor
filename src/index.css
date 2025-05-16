@@ -4,3 +4,56 @@ body {
   box-sizing: border-box;
   overflow-x: hidden;
 }
+
+.editor {
+  width: 100%;
+  height: calc(100% - 90px);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  padding-left: 10px;
+  border-bottom: 1px solid #ccc;
+
+  h4 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #172B4D;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif !important;
+  }
+}
+
+.editor-header-actions {
+  display: flex;
+  gap: 10px;
+  font-family: 'Open Sans', sans-serif !important;
+  padding: 5px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    background: #EBECF0;
+    color: #42526E;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #DFE1E6;
+    }
+
+    &:active {
+      background: #C1C7D0;
+    }
+  }
+}
+

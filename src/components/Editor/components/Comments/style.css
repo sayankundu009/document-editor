@@ -1,0 +1,126 @@
+.comments-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 80vh;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+  padding: 16px;
+  z-index: 1000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.comment-header-title {
+  display: flex;
+  align-items: center;
+}
+
+.user-info .user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #172B4D;
+}
+
+.comment-actions {
+  display: flex;
+  align-items: center;
+}
+
+.comment-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6B778C;
+  padding: 4px;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.comment-action-btn:hover {
+  background-color: #EBECF0;
+}
+
+.comment-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.comment-thread {
+  margin-bottom: 16px;
+}
+
+.comment-item {
+  margin-block-end: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.comment-box {
+  width: 100%;
+  min-height: 80px;
+  border: 2px solid #DFE1E6;
+  border-radius: 3px;
+  background: #FAFBFC;
+  color: #172B4D;
+  padding: 8px;
+  margin-bottom: 16px;
+  resize: vertical;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.comment-box::placeholder {
+  color: #7A869A;
+}
+
+.comment-box:focus {
+  outline: none;
+  background-color: #FFFFFF;
+  border-color: #4C9AFF;
+}
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.comment-footer .btn {
+  background: #0052CC;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.comment-footer .btn:hover {
+  background-color: #0065FF;
+}
+
+.comment-footer .btn-danger {
+  background-color: #B12222;
+}
+
+.comment-footer .btn-danger:hover {
+  background-color: #8B0000;
+}

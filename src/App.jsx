@@ -1,10 +1,9 @@
 import './App.css'
-import { useState, Suspense, lazy } from 'react';
+import { useState } from 'react';
 import Sidebar from './components/Sidebar';
+import DocumentEditor from './components/Editor';
+import PreviewEditor from './components/Editor/preview';
 import { Eye, Pencil } from 'lucide-react';
-
-const PreviewEditor = lazy(() => import('./components/Editor/preview'));
-const DocumentEditor = lazy(() => import('./components/Editor'));
 
 const users = [
   {
@@ -106,38 +105,34 @@ function App() {
             </div>
           </div>
           {!isPreview ? (
-            <Suspense fallback={<div></div>}>
-              <DocumentEditor
-                value={value}
-                onChange={(content) => {
-                  setValue(content);
-                }}
-                mention={{
-                  items: users,
-                  getLabel: (item) => item.name,
-                  getId: (item) => item.id,
-                }}
-                selectedComment={currentComment}
-                onCommentOpen={onCommentOpen}
-                onCommentCreate={handleCommentCreate}
-                onCommentReply={handleCommentReply}
-                onCommentDelete={handleCommentDelete}
-              />
-            </Suspense>
+            <DocumentEditor
+              value={value}
+              onChange={(content) => {
+                setValue(content);
+              }}
+              mention={{
+                items: users,
+                getLabel: (item) => item.name,
+                getId: (item) => item.id,
+              }}
+              selectedComment={currentComment}
+              onCommentOpen={onCommentOpen}
+              onCommentCreate={handleCommentCreate}
+              onCommentReply={handleCommentReply}
+              onCommentDelete={handleCommentDelete}
+            />
           ) : (
-            <Suspense fallback={<div></div>}>
-              <PreviewEditor
-                value={value}
-                onChange={(content) => {
-                  setValue(content);
-                }}
-                selectedComment={currentComment}
-                onCommentOpen={onCommentOpen}
-                onCommentCreate={handleCommentCreate}
-                onCommentReply={handleCommentReply}
-                onCommentDelete={handleCommentDelete}
-              />
-            </Suspense>
+            <PreviewEditor
+              value={value}
+              onChange={(content) => {
+                setValue(content);
+              }}
+              selectedComment={currentComment}
+              onCommentOpen={onCommentOpen}
+              onCommentCreate={handleCommentCreate}
+              onCommentReply={handleCommentReply}
+              onCommentDelete={handleCommentDelete}
+            />
           )}
         </section>
       </main>

@@ -51,9 +51,28 @@ const initialData = [
 ];
 
 export default function Sidebar() {
+    const handleOpen = (data) => {};
+    
+    const handleMove = (data) => {};
+    
+    const handleAppend = (data) => {};
+    
+    const handleRemove = (data) => {};
+    
+    const handleRename = (data) => {};
+    
+    const handleChange = (data) => {};
+
     return (
         <div>
-            <TreeStructure data={initialData} />
+            <TreeStructure data={initialData} 
+                onChange={handleChange} 
+                onOpen={handleOpen} 
+                onMove={handleMove} 
+                onAppend={handleAppend} 
+                onRemove={handleRemove} 
+                onRename={handleRename} 
+            />
         </div>
     );
 }

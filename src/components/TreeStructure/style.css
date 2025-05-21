@@ -3,6 +3,16 @@
   position: relative;
 }
 
+.tree-node.active {
+  & > .tree-node-header {
+    background-color: #EBECF0;
+
+    .tree-node-actions {
+      opacity: 1;
+    }
+  }
+}
+
 .tree-node.dragging {
   opacity: 0.5;
 }
@@ -70,3 +80,55 @@
 .tree-node-children {
   margin-left: 24px;
 }
+
+.tree-node-input {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: inherit;
+  font-family: inherit;
+  background: white;
+  outline: none;
+  width: 100%;
+}
+
+.tree-node-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+/* Context menu */
+.contexify {
+  --contexify-zIndex: 1000;
+  --contexify-menu-minWidth: 180px;
+  --contexify-menu-padding: 4px;
+  --contexify-menu-radius: 3px;
+  --contexify-menu-bgColor: #FFFFFF;
+  --contexify-menu-shadow: 0 4px 8px -2px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+  --contexify-menu-negatePadding: var(--contexify-menu-padding);
+  --contexify-separator-color: #DFE1E6;
+  --contexify-separator-margin: 2px;
+  --contexify-itemContent-padding: 6px 8px;
+  --contexify-activeItem-radius: 3px;
+  --contexify-item-color: #172B4D;
+  --contexify-activeItem-color: #172B4D;
+  --contexify-activeItem-bgColor: #F4F5F7;
+  --contexify-rightSlot-color: #6B778C;
+  --contexify-activeRightSlot-color: #6B778C;
+  --contexify-arrow-color: #6B778C;
+  --contexify-activeArrow-color: #6B778C;
+
+  .contexify_item{
+    margin-bottom: 5px;
+
+    &.danger .contexify_itemContent:hover{
+      background-color: #FFEBEE;
+    }
+  }
+  .contexify_itemContent{
+    gap: 8px;
+  }
+}
+
+
+

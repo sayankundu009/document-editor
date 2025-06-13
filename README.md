@@ -29,13 +29,14 @@ A modern document editor built with React and TipTap, featuring rich text editin
 - @sereneinserenade/tiptap-comment-extension@0.1.2
 - lucide-react@0.509.0
 - tippy.js@6.3.7
+- @harshtalks/slash-tiptap
 
 ## Installation
 
 Install all dependencies with a single command:
 
 ```bash
-npm install @tiptap/extension-color@2.12.0 @tiptap/extension-document@2.12.0 @tiptap/extension-highlight@2.12.0 @tiptap/extension-link@2.12.0 @tiptap/extension-mention@2.12.0 @tiptap/extension-placeholder@2.12.0 @tiptap/extension-text-style@2.12.0 @tiptap/pm@2.12.0 @tiptap/react@2.12.0 @tiptap/starter-kit@2.12.0 @tiptap/suggestion@2.12.0 @sereneinserenade/tiptap-comment-extension@0.1.2 lucide-react@0.509.0 tippy.js@6.3.7
+npm install @tiptap/extension-color@2.12.0 @tiptap/extension-document@2.12.0 @tiptap/extension-highlight@2.12.0 @tiptap/extension-link@2.12.0 @tiptap/extension-mention@2.12.0 @tiptap/extension-placeholder@2.12.0 @tiptap/extension-text-style@2.12.0 @tiptap/pm@2.12.0 @tiptap/react@2.12.0 @tiptap/starter-kit@2.12.0 @tiptap/suggestion@2.12.0 @sereneinserenade/tiptap-comment-extension@0.1.2 lucide-react@0.509.0 tippy.js@6.3.7 @harshtalks/slash-tiptap
 
 ```
 

@@ -8,6 +8,7 @@
 
 .document-editor{
     padding: 24px;
+    padding-top: 16px;
     min-height: 200px;
     border: none;
     outline: none;
@@ -23,7 +24,7 @@
     h1 {
       font-size: 24px;
       font-weight: 500;
-      margin: 24px 0 16px;
+      margin: 16px 0 16px;
       color: #172B4D;
     }
     
@@ -90,16 +91,23 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    p.is-editor-empty:first-child::before {
+      color: #adb5bd;
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+    }
     
-    
-    .is-empty::before{
+    /* .is-empty::before{
         content: attr(data-placeholder);
         float: left;
         color: #969899;
         pointer-events: none;
         height: 0;
         display: none;
-    }
+    } */
 
     .is-empty:first-child::before {
       display: block;

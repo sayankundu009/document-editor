@@ -230,7 +230,6 @@ function Node({ node, moveNode, appendNode, removeNode, first, renameNode, openN
                 handleRemoveNode(node.id);
                 break;
             case 'copy':
-                console.log('copy');
                 break;
         }
     }

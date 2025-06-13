@@ -6,6 +6,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Menu from './components/Menu';
 import SuggestionExtension from './extensions/Mention';
 import Link from './extensions/Link'
+import ListKeymap from '@tiptap/extension-list-keymap'
 import BubbleMenu from './components/BubbleMenu';
 import AiPanel from './components/AiPanel';
 import { Color } from '@tiptap/extension-color'
@@ -14,6 +15,8 @@ import Highlight from '@tiptap/extension-highlight'
 import Fragment from './extensions/Fragment';
 import SelectionHighlight from './extensions/SelectionHighlight';
 import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
+import { SlashProvider, SlashElement, SlashExtension } from './extensions/Slash';
+import { enableKeyboardNavigation } from '@harshtalks/slash-tiptap';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -64,11 +67,7 @@ const DocumentEditor = (props) => {
             }),
             Placeholder.configure({
                 placeholder: ({ node }) => {
-                    if (node.type.name === 'heading') {
-                        return 'Give this page a title'
-                    }
-
-                    return 'Type / for all elements or @ to mention someone'
+                    return 'Type / for all commands or @ to mention someone'
                 },
                 showOnlyCurrent: false
             }),
@@ -97,6 +96,8 @@ const DocumentEditor = (props) => {
                     }
                 },
             }),
+            ListKeymap,
+            SlashExtension,
             Fragment,
         ]
     }, [])
@@ -107,6 +108,9 @@ const DocumentEditor = (props) => {
         editorProps: {
             attributes: {
                 class: 'document-editor',
+            },
+            handleDOMEvents: {
+                keydown: (_, v) => enableKeyboardNavigation(v),
             },
         },
         // Events
@@ -239,23 +243,26 @@ const DocumentEditor = (props) => {
     }, [editor]);
 
     return (
-        <section className="editor-container">
-            <Menu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
-            <EditorContent editor={editor} />
-            <BubbleMenu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
-            <AiPanel editor={editor} selection={selectionRef} open={isAiPanelOpen} onClose={closeAiPanel} />
-            <Comments
-                open={isCommentsPanelOpen}
-                editor={editor}
-                selection={selectionRef}
-                onClose={closeCommentsPanel}
-                onCleanup={cleanUpCommentsPanel}
-                selectedComment={selectedComment}
-                onCommentCreate={props.onCommentCreate}
-                onCommentReply={props.onCommentReply}
-                onCommentDelete={onCommentDelete}
-            />
-        </section>
+        <SlashProvider>
+            <section className="editor-container">
+                <Menu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
+                <EditorContent editor={editor} />
+                <BubbleMenu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
+                <AiPanel editor={editor} selection={selectionRef} open={isAiPanelOpen} onClose={closeAiPanel} />
+                <Comments
+                    open={isCommentsPanelOpen}
+                    editor={editor}
+                    selection={selectionRef}
+                    onClose={closeCommentsPanel}
+                    onCleanup={cleanUpCommentsPanel}
+                    selectedComment={selectedComment}
+                    onCommentCreate={props.onCommentCreate}
+                    onCommentReply={props.onCommentReply}
+                    onCommentDelete={onCommentDelete}
+                />
+                <SlashElement editor={editor} />
+            </section>
+        </SlashProvider>
     )
 }
 

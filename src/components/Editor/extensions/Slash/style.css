@@ -1,0 +1,57 @@
+[cmdk-list]:has(.slash-extension-item) {
+    background: #FFFFFF;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px -2px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+    padding: 8px;
+    min-width: 200px;
+    max-width: 300px;
+    border: 1px solid #DFE1E6;
+}
+
+.slash-extension-item {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #172B4D;
+    padding: 8px;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: background-color 0.1s;
+}
+
+.slash-extension-item svg {
+    width: 16px;
+    height: 16px;
+    color: #6B778C;
+}
+
+.slash-extension-item span {
+    flex: 1;
+}
+
+.slash-extension-item:hover {
+    border-left-color: #0052CC;
+    background: #EBECF0;
+}
+
+.slash-extension-item:active {
+    border-left-color: #0052CC;
+    background: #EBECF0;
+}
+
+[cmdk-item]:has(.slash-extension-item)[data-selected]{
+    border-left: 3px solid transparent;
+}
+
+[cmdk-item]:has(.slash-extension-item)[data-selected='true']{
+    border-left-color: #0052CC;
+    background: #EBECF0;
+}

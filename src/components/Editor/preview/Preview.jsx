@@ -5,6 +5,13 @@ import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
 import SelectionHighlight from '../extensions/SelectionHighlight';
 import PreventSuspiciousUpdate from '../extensions/PreventSuspiciousUpdate';
 
+import Image from '@tiptap/extension-image'
+
+import Table from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableCell from '../extensions/Table/TableCell'
+import TableHeader from '../extensions/Table/TableHeader'
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Comments from '../components/Comments';
@@ -59,6 +66,16 @@ const PreviewEditor = (props) => {
             PreventSuspiciousUpdate.configure({
                 onChange: props.onChange,
             }),
+            Image.configure({
+                allowBase64: true,
+                HTMLAttributes: {
+                    class: "editor-image",
+                }
+            }),
+            Table,
+            TableRow,
+            TableHeader,
+            TableCell,
         ]
     }, [props.onCommentOpen, props.onChange]);
 

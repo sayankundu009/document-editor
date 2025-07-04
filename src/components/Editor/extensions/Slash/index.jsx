@@ -7,7 +7,7 @@ import {
 
 import "./style.css";
 
-import { Heading, List, ListOrdered, Type } from 'lucide-react'
+import { Heading, List, ListOrdered, Type, Table } from 'lucide-react'
 
 export const SlashExtension = Slash.extend({
     suggestion: {
@@ -54,6 +54,13 @@ export const suggestions = createSuggestionsItems([
             editor.chain().focus().deleteRange(range).toggleOrderedList().run();
         },
     },
+    {
+        title: "Table",
+        searchTerms: ["table", "grid"],
+        command: ({ editor, range }) => {
+            editor.chain().focus().deleteRange(range).insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+        },
+    },
 ]);
 
 function Icon({ title }) {
@@ -66,6 +73,8 @@ function Icon({ title }) {
             return <List />;
         case "Ordered List":
             return <ListOrdered />;
+        case "Table":
+            return <Table />;
         default:
             return null;
     }

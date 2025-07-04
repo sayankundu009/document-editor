@@ -13,7 +13,8 @@ import {
   Undo2,
   Redo2,
   AtSign,
-  Baseline
+  Baseline,
+  Table
 } from 'lucide-react'
 
 import './style.css'
@@ -166,6 +167,12 @@ const Menu = ({ editor }) => {
         title="Code Block"
       >
         <Code2 size={16} />
+      </button>
+      <button
+        onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}
+        title="Insert Table"
+      >
+        <Table size={16} />
       </button>
       <button
         onClick={() => { 

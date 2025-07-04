@@ -9,11 +9,13 @@ import {
 
 import './style.css'
 
+const AI_ENABLED = false;
+
 export default function ({ editor, openAiPanel, openCommentsPanel, preview = false }) {
     return (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
             <div className="bubble-menu">
-                {!preview && (
+                {!preview && AI_ENABLED && (
                     <button
                         onClick={() => { editor.chain().blur().run(); openAiPanel() }}
                     >
@@ -22,7 +24,7 @@ export default function ({ editor, openAiPanel, openCommentsPanel, preview = fal
                     </button>
                 )}
 
-                {!editor.isActive('comment') && (
+                {!editor.isActive('comment') && !editor.isActive('table') && (
                     <button
                         onClick={() => openCommentsPanel()}
                     >

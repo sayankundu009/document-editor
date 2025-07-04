@@ -1,4 +1,4 @@
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent, ReactNodeViewRenderer, NodeViewWrapper, NodeViewContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Document from '@tiptap/extension-document'
 import Mention from '@tiptap/extension-mention'
@@ -18,6 +18,15 @@ import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
 import { SlashProvider, SlashElement, SlashExtension } from './extensions/Slash';
 import { enableKeyboardNavigation } from '@harshtalks/slash-tiptap';
 
+import Image from '@tiptap/extension-image'
+
+import Table from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableHeader from './extensions/Table/TableHeader'
+import TableCell from './extensions/Table/TableCell'
+import TablePanel from './components/TablePanel'
+import UniqueID from '@tiptap/extension-unique-id'
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import tippy from 'tippy.js';
@@ -34,6 +43,21 @@ const DEFAULT_CONTENT = `
   <h1></h1>
   <p></p>
 `;
+
+const generateUniqueId = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+function uploadFile(file) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const fileReader = new FileReader();
+
+            fileReader.readAsDataURL(file)
+            fileReader.onload = () => {
+                resolve({ src: fileReader.result });
+            }
+        }, 2000);
+    });
+}
 
 const DocumentEditor = (props) => {
     const selectionRef = useRef({ from: 0, to: 0 });
@@ -98,7 +122,31 @@ const DocumentEditor = (props) => {
             }),
             ListKeymap,
             SlashExtension,
+            // Image.configure({
+            //     allowBase64: true,
+            //     HTMLAttributes: {
+            //         class: "editor-image",
+            //     }
+            // }),
+            Image,
+
             Fragment,
+
+            UniqueID.configure({
+                attributeName: 'uid',
+                types: ['table', 'tableRow', 'tableHeader', 'tableCell'],
+                generateID: () => {
+                    return 'table-' + window.crypto.randomUUID();
+                }
+            }),
+            Table.configure({
+                resizable: true,
+                lastColumnResizable: false,
+            }),
+            TableRow,
+            TableHeader,
+            TableCell,
+
         ]
     }, [])
 
@@ -111,6 +159,45 @@ const DocumentEditor = (props) => {
             },
             handleDOMEvents: {
                 keydown: (_, v) => enableKeyboardNavigation(v),
+            },
+            handlePaste: function (view, event, slice) {
+                const files = Array.from(event.clipboardData?.files || []);
+
+                const { schema } = view.state
+
+                for (const file of files) {
+                    if (file.type.indexOf("image") === 0) {
+                        const uploadId = generateUniqueId();
+
+                        const node = schema.nodes.image.create({
+                            src: "https://www.tableau.com/sites/default/files/blog/spinning_wheel_2.gif",
+                            title: uploadId,
+                        });
+
+                        const transaction = view.state.tr.replaceSelectionWith(node);
+
+                        view.dispatch(transaction)
+
+                        uploadFile(file).then((data) => {
+                            editor.state.doc.descendants((node, pos) => {
+                                if (node.type.name === 'image' && node.attrs && node.attrs['title'] === uploadId) {
+                                    const transaction = editor.state.tr.setNodeMarkup(pos, undefined, {
+                                        ...node.attrs,
+                                        src: data.src,
+                                        title: undefined,
+                                    }).setMeta("addToHistory", false)
+
+                                    editor.view.dispatch(transaction);
+
+                                    return false;
+                                }
+                            });
+                        });
+
+                        return true;
+                    }
+                }
+                return false;
             },
         },
         // Events
@@ -261,6 +348,7 @@ const DocumentEditor = (props) => {
                     onCommentDelete={onCommentDelete}
                 />
                 <SlashElement editor={editor} />
+                <TablePanel editor={editor} />
             </section>
         </SlashProvider>
     )

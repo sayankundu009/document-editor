@@ -35,6 +35,24 @@ function App() {
     <p>Welcome to our collaborative document editor! Here's a <span class="comment" data-comment-id="123">sample comment</span> to show how comments work. Try clicking on the highlighted text to view the comment thread.</p>
     <p>You can also try mentioning users like <span class="mention" data-type="mention" data-id="1" data-label="Sayan Kundu">@Sayan Kundu</span> or <span class="mention" data-type="mention" data-id="2" data-label="Jane Doe">@Jane Doe</span> </p>
     <p>This is a preview mode where you can view and interact with comments, but cannot edit the content directly.</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Cyndi Lauper</td>
+          <td>Singer</td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   `);
 
   const [comments, setComments] = useState(commentCollection);

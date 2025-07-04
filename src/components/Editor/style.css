@@ -92,6 +92,11 @@
       cursor: pointer;
     }
 
+    .editor-image {
+      width: 60%;
+      object-fit: cover;
+    }
+
     p.is-editor-empty:first-child::before {
       color: #adb5bd;
       content: attr(data-placeholder);
@@ -152,6 +157,70 @@
       &::after {
           content: "\200B";
       }
+    }
+
+    /* Table */
+    table {
+      border-collapse: collapse;
+      margin: 16px 0;
+      table-layout: fixed;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    table td,
+    table th {
+      border: 2px solid #ced4da;
+      box-sizing: border-box;
+      min-width: 1em;
+      padding: 8px 12px;
+      position: relative;
+      vertical-align: top;
+    }
+
+    table th {
+      background-color: #f8f9fa;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    table .selectedCell:after {
+      background: rgba(200, 200, 255, 0.4);
+      content: "";
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 2;
+    }
+
+    table .column-resize-handle {
+      background-color: #adf;
+      bottom: -2px;
+      position: absolute;
+      right: -2px;
+      pointer-events: none;
+      top: 0;
+      width: 4px;
+    }
+
+    table p {
+      margin: 0;
+    }
+
+    table:has(.column-resize-handle){
+      cursor: col-resize !important;
+    }
+    table:has(.column-resize-handle) .column-resize-handle {
+      background-color: #0052CC;
+      width: 2px;
+      right: 0;
+    }
+
+    img {
+      width: 40%;
     }
 }
 

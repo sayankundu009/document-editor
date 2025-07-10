@@ -1,43 +1,44 @@
-import { useEditor, EditorContent, ReactNodeViewRenderer, NodeViewWrapper, NodeViewContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Document from '@tiptap/extension-document'
-import Mention from '@tiptap/extension-mention'
-import Placeholder from '@tiptap/extension-placeholder';
-import Menu from './components/Menu';
-import SuggestionExtension from './extensions/Mention';
-import Link from './extensions/Link'
-import ListKeymap from '@tiptap/extension-list-keymap'
-import BubbleMenu from './components/BubbleMenu';
-import AiPanel from './components/AiPanel';
-import { Color } from '@tiptap/extension-color'
-import TextStyle from '@tiptap/extension-text-style';
-import Highlight from '@tiptap/extension-highlight'
-import Fragment from './extensions/Fragment';
-import SelectionHighlight from './extensions/SelectionHighlight';
-import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
-import { SlashProvider, SlashElement, SlashExtension } from './extensions/Slash';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import { useEditor, EditorContent } from '@tiptap/react';
+import { Color } from '@tiptap/extension-color';
 import { enableKeyboardNavigation } from '@harshtalks/slash-tiptap';
 
-import Image from '@tiptap/extension-image'
+import StarterKit from '@tiptap/starter-kit';
+import Document from '@tiptap/extension-document';
+import Mention from '@tiptap/extension-mention';
+import Placeholder from '@tiptap/extension-placeholder';
+import ListKeymap from '@tiptap/extension-list-keymap';
+import TextStyle from '@tiptap/extension-text-style';
+import Highlight from '@tiptap/extension-highlight';
+import UniqueID from '@tiptap/extension-unique-id';
+import Table from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
 
-import Table from '@tiptap/extension-table'
-import TableRow from '@tiptap/extension-table-row'
-import TableHeader from './extensions/Table/TableHeader'
-import TableCell from './extensions/Table/TableCell'
-import TablePanel from './components/TablePanel'
-import UniqueID from '@tiptap/extension-unique-id'
+import BubbleMenu from './components/BubbleMenu';
+import Comments from './components/Comments';
+import ImagePanel from './components/ImagePanel';
+import Menu from './components/Menu';
+import TablePanel from './components/TablePanel';
+import AiPanel from './components/AiPanel';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import TableHeader from './extensions/Table/TableHeader';
+import TableCell from './extensions/Table/TableCell';
+import Link from './extensions/Link';
+import Fragment from './extensions/Fragment';
+import SelectionHighlight from './extensions/SelectionHighlight';
+import SuggestionExtension from './extensions/Mention';
+import Image from './extensions/Image';
+import { SlashProvider, SlashElement, SlashExtension } from './extensions/Slash';
+
+import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
 
 import tippy from 'tippy.js';
 import 'tippy.js/themes/light.css';
 
 import './style.css';
-import Comments from './components/Comments';
 
-const CustomDocument = Document.extend({
-    // content: 'heading block*',
-});
+const CustomDocument = Document.extend({});
 
 const DEFAULT_CONTENT = `
   <h1></h1>
@@ -46,6 +47,7 @@ const DEFAULT_CONTENT = `
 
 const generateUniqueId = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
+// TODO: Replace with actual file upload API
 function uploadFile(file) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -122,13 +124,12 @@ const DocumentEditor = (props) => {
             }),
             ListKeymap,
             SlashExtension,
-            // Image.configure({
-            //     allowBase64: true,
-            //     HTMLAttributes: {
-            //         class: "editor-image",
-            //     }
-            // }),
-            Image,
+            Image.configure({
+                allowBase64: true,
+                HTMLAttributes: {
+                    class: "editor-image",
+                }
+            }),
 
             Fragment,
 
@@ -146,7 +147,6 @@ const DocumentEditor = (props) => {
             TableRow,
             TableHeader,
             TableCell,
-
         ]
     }, [])
 
@@ -155,12 +155,14 @@ const DocumentEditor = (props) => {
         content,
         editorProps: {
             attributes: {
-                class: 'document-editor',
+                class: 'document-editor edit',
             },
             handleDOMEvents: {
                 keydown: (_, v) => enableKeyboardNavigation(v),
             },
             handlePaste: function (view, event, slice) {
+                setTimeout(() => editor.chain().focus("start").blur().run(), 0);
+
                 const files = Array.from(event.clipboardData?.files || []);
 
                 const { schema } = view.state
@@ -171,6 +173,7 @@ const DocumentEditor = (props) => {
 
                         const node = schema.nodes.image.create({
                             src: "https://www.tableau.com/sites/default/files/blog/spinning_wheel_2.gif",
+                            align: "center",
                             title: uploadId,
                         });
 
@@ -197,6 +200,7 @@ const DocumentEditor = (props) => {
                         return true;
                     }
                 }
+
                 return false;
             },
         },
@@ -331,9 +335,11 @@ const DocumentEditor = (props) => {
 
     return (
         <SlashProvider>
-            <section className="editor-container">
+            <section className="editor-container edit">
                 <Menu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
+                
                 <EditorContent editor={editor} />
+                
                 <BubbleMenu editor={editor} openAiPanel={openAiPanel} openCommentsPanel={openCommentsPanel} onCommentDelete={onCommentDelete} />
                 <AiPanel editor={editor} selection={selectionRef} open={isAiPanelOpen} onClose={closeAiPanel} />
                 <Comments
@@ -349,6 +355,7 @@ const DocumentEditor = (props) => {
                 />
                 <SlashElement editor={editor} />
                 <TablePanel editor={editor} />
+                <ImagePanel editor={editor} />
             </section>
         </SlashProvider>
     )

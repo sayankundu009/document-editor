@@ -1,0 +1,39 @@
+.moveable-image {
+    .moveable-line{
+        background-color: transparent !important;
+    }
+    .moveable-control.moveable-direction.moveable-e {
+        background-color: #b9b9ba !important;
+        width: .5rem;
+        height: 5rem;
+        margin-top: -35px;
+        margin-left: -5px;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+    .moveable-control.moveable-direction.moveable-e:hover {
+        background-color: #0052CC !important;
+    }
+    .moveable-control.moveable-direction.moveable-e:active {
+        background-color: #0052CC !important;
+    }
+    .moveable-control.moveable-direction.moveable-w {
+        background-color: #b9b9ba !important;
+        width: .5rem;
+        height: 5rem;
+        margin-top: -35px;
+        margin-left: -5px;
+        border-radius: 5px;
+        transition: background-color 0.2s;
+    }
+    .moveable-control.moveable-direction.moveable-w:hover {
+        background-color: #0052CC !important;
+    }
+    .moveable-control.moveable-direction.moveable-w:active {
+        background-color: #0052CC !important;
+    }
+
+    .moveable-origin {
+        display: none;
+    }
+}

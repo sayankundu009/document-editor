@@ -372,16 +372,16 @@ export default function TablePanel({ editor }) {
             <style>
                 {hovering['delete-table'] && `
                     table:has(td[data-uid="${tableActiveCellUid}"]) {
+                        outline: 3px solid red !important;
+
                         th, td {
-                            outline: 1px solid red !important;
-                            outline-offset: -3px !important;
                             background-color: #f8b9b9 !important;
                         }
                     }
                     table:has(th[data-uid="${tableActiveCellUid}"]) {
+                        outline: 3px solid red !important;
+
                         th, td {
-                            outline: 1px solid red !important;
-                            outline-offset: -3px !important;
                             background-color: #f8b9b9 !important;
                         }
                     }

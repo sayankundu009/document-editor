@@ -45,3 +45,11 @@
   background-color: #DFE1E6;
   margin: 0 2px;
 }
+
+.bubble-menu button.is-danger {
+  color: #e74c3c;
+}
+
+.bubble-menu button.is-danger:hover {
+  background: #ff563020;
+}

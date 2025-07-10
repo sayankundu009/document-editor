@@ -94,7 +94,20 @@
 
     .editor-image {
       width: 60%;
+      display: grid;
       object-fit: cover;
+    }
+    &.edit .editor-image {
+      cursor: pointer;
+    }
+    .editor-image[data-align="left"] {
+      place-self: start;
+    }
+    .editor-image[data-align="right"] {
+      place-self: end;
+    }
+    .editor-image[data-align="center"] {
+      place-self: center;
     }
 
     p.is-editor-empty:first-child::before {
@@ -218,12 +231,7 @@
       width: 2px;
       right: 0;
     }
-
-    img {
-      width: 40%;
-    }
 }
-
 
 .tippy-box[data-theme~='light'] {
   background-color: #fff;

@@ -5,7 +5,7 @@ import CommentExtension from "@sereneinserenade/tiptap-comment-extension";
 import SelectionHighlight from '../extensions/SelectionHighlight';
 import PreventSuspiciousUpdate from '../extensions/PreventSuspiciousUpdate';
 
-import Image from '@tiptap/extension-image'
+import Image from '../extensions/Image'
 
 import Table from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
@@ -88,6 +88,9 @@ const PreviewEditor = (props) => {
             },
             handleDOMEvents: {
                 drop: (view, e) => { e.preventDefault(); return true; },
+            },
+            handlePaste() {
+                return true;
             }
         },
         dropCursor: { width: 0, color: 'transparent' },
